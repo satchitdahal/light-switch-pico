@@ -92,24 +92,43 @@ while True:
         print( 'light mid = ' + str(light_mid))
         #this while loop will always be running
         
-        if light_on == 6:
-            pwm = PWM(Pin(1))
-            pwm.freq(50)
-            MAX = 1250000
-            pwm.duty_ns(MAX)
+        # if light_on == 6:
+        #     pwm = PWM(Pin(1))
+        #     pwm.freq(50)
+        #     MAX = 1250000
+        #     pwm.duty_ns(MAX)
             
                    
-        if light_off == 6:
-            pwm = PWM(Pin(1))
-            pwm.freq(50)
-            MIN = 450000
-            pwm.duty_ns(MIN)
+        # if light_off == 6:
+        #     pwm = PWM(Pin(1))
+        #     pwm.freq(50)
+        #     MIN = 450000
+        #     pwm.duty_ns(MIN)
             
-        if light_mid == 6:
-            pwm = PWM(Pin(1))
-            pwm.freq(50)
-            MID = 600000
-            pwm.duty_ns(MID)
+        # if light_mid == 6:
+        #     pwm = PWM(Pin(1))
+        #     pwm.freq(50)
+        #     MID = 600000
+        #     pwm.duty_ns(MID)
+        # Define constants for PWM duty cycles
+PWM_FREQUENCY = 50
+DUTY_CYCLE_MAX = 1250000
+DUTY_CYCLE_MIN = 450000
+DUTY_CYCLE_MID = 600000
+
+# Initialize PWM on Pin 1
+pwm = PWM(Pin(1))
+pwm.freq(PWM_FREQUENCY)
+
+def set_pwm_duty(light_status):
+    if light_status == 'on':
+        pwm.duty_ns(DUTY_CYCLE_MAX)
+    elif light_status == 'off':
+        pwm.duty_ns(DUTY_CYCLE_MIN)
+    elif light_status == 'mid':
+        pwm.duty_ns(DUTY_CYCLE_MID)
+    else:
+        raise ValueError("Invalid light_status. Use 'on', 'off', or 'mid'.")
             
            
          
